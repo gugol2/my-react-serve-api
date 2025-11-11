@@ -2,12 +2,14 @@
   "name": "my-react-serve-api",
   "version": "1.0.0",
   "description": "A ReactServe application",
+  "type": "module",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "dev": "tsx --watch src/index.tsx",
     "debug": "tsx --inspect=9229 --watch src/index.tsx",
     "start": "tsx src/index.tsx",
+    "serve": "npm run build && node dist/index.js",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [

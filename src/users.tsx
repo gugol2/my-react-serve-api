@@ -5,7 +5,7 @@ import {
   useContext,
   useRoute
 } from 'react-serve-js'
-import { requestTimingMiddleware } from './middleware/requestTimingMiddleware'
+import { requestTimingMiddleware } from './middleware/requestTimingMiddleware.js'
 
 const users = [
   { id: 1, name: 'John Doe', email: 'john@example.com' },

@@ -1,6 +1,6 @@
 import { App, Response, Route, serve } from 'react-serve-js'
-import { PostRoutes } from './posts'
-import { UserRoutes } from './users'
+import { PostRoutes } from './posts.js'
+import { UserRoutes } from './users.js'
 
 function Backend () {
   return (
