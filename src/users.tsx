@@ -22,7 +22,10 @@ export const UserRoutes = () => {
           return user ? (
             <Response json={user} />
           ) : (
-            <Response status={404} json={{ error: 'User not found' }} />
+            <Response
+              status={404}
+              json={{ error: `User with id ${params.id} not found` }}
+            />
           )
         }}
       </Route>
