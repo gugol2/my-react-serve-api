@@ -5,7 +5,7 @@ import {
   RouteGroup,
   useRoute
 } from 'react-serve-js'
-import { loggingMiddleware } from './loggingMiddleware'
+import { loggingMiddleware } from './middleware/loggingMiddleware'
 
 const posts = [
   { id: 1, title: 'First Post', content: 'This is the first post.', userId: 1 },
