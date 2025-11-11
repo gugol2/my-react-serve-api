@@ -1,4 +1,11 @@
-import { Response, Route, RouteGroup, useRoute } from 'react-serve-js'
+import {
+  Middleware,
+  Response,
+  Route,
+  RouteGroup,
+  useRoute
+} from 'react-serve-js'
+import { loggingMiddleware } from './loggingMiddleware'
 
 const posts = [
   { id: 1, title: 'First Post', content: 'This is the first post.', userId: 1 },
@@ -21,6 +28,8 @@ const searchPosts = (query: string) => {
 export const PostRoutes = () => {
   return (
     <RouteGroup prefix='/posts'>
+      <Middleware use={loggingMiddleware} />
+
       <Route path='/' method='GET'>
         {async () => {
           const { query } = useRoute()
