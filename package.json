@@ -10,7 +10,9 @@
     "debug": "tsx --inspect=9229 --watch src/index.tsx",
     "start": "tsx src/index.tsx",
     "serve": "npm run build && node dist/index.js",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "test:ui": "vitest --ui"
   },
   "keywords": [
     "react-serve",
@@ -20,12 +22,16 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "react-serve-js": "^0.7.0",
-    "react": "^19.1.1"
+    "react": "^19.1.1",
+    "react-serve-js": "^0.7.0"
   },
   "devDependencies": {
     "@types/react": "^19.1.10",
+    "@types/supertest": "^6.0.3",
+    "@vitest/ui": "^4.0.8",
+    "supertest": "^7.1.4",
     "tsx": "^4.20.4",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "vitest": "^4.0.8"
   }
 }
