@@ -1,10 +1,12 @@
-import { MiddlewareFunction } from 'react-serve-js'
+import { MiddlewareFunction } from "react-serve-js";
 
 export const loggingMiddleware: MiddlewareFunction = (req, next) => {
   console.log(
-    `${req.method} ${req.path} ${JSON.stringify(
+    `${req.method} - ${req.path} - params:${JSON.stringify(
+      req.params
+    )} - query: ${JSON.stringify(
       req.query
-    )}- ${new Date().toISOString()}`
-  )
-  return next()
-}
+    )} - date: ${new Date().toISOString()}`
+  );
+  return next();
+};
