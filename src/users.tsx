@@ -5,11 +5,21 @@ const users = [
   { id: 2, name: 'Jane Smith', email: 'jane@example.com' }
 ]
 
+const searchUsers = (query: string) => {
+  return users.filter(user =>
+    user.name.toLowerCase().includes(query.toLowerCase())
+  )
+}
+
 export const UserRoutes = () => {
   return (
     <RouteGroup prefix='/users'>
       <Route path='/' method='GET'>
         {async () => {
+          const { query } = useRoute()
+          if (query.q) {
+            return <Response json={{ users: searchUsers(query.q) }} />
+          }
           return <Response json={{ users }} />
         }}
       </Route>
