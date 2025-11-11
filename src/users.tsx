@@ -1,4 +1,11 @@
-import { Response, Route, RouteGroup, useRoute } from 'react-serve-js'
+import {
+  Response,
+  Route,
+  RouteGroup,
+  useContext,
+  useRoute
+} from 'react-serve-js'
+import { requestTimingMiddleware } from './middleware/requestTimingMiddleware'
 
 const users = [
   { id: 1, name: 'John Doe', email: 'john@example.com' },
@@ -24,13 +31,18 @@ export const UserRoutes = () => {
         }}
       </Route>
 
-      <Route path='/:id' method='GET'>
+      <Route path='/:id' method='GET' middleware={requestTimingMiddleware}>
         {async () => {
           const { params } = useRoute()
           const user = users.find(u => u.id === Number(params.id))
 
+          const startTime = useContext('startTime')
+          const duration = Date.now() - startTime
+
           return user ? (
-            <Response json={user} />
+            <Response
+              json={{ user: user, meta: { duration: `${duration} ms` } }}
+            />
           ) : (
             <Response
               status={404}
