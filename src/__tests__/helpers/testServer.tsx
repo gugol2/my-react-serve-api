@@ -1,9 +1,7 @@
-import { App, Response, Route, serve } from 'react-serve-js'
-import { PostRoutes } from '../../posts.js'
-import { UserRoutes } from '../../users.js'
+import { App, Response, Route, serve, RouteGroup } from 'react-serve-js'
 
-export function createTestServer() {
-  function Backend() {
+export function createTestServer (Routes?: typeof RouteGroup) {
+  function Backend () {
     return (
       <App port={0} parseBody={true}>
         <Route path='/' method='GET'>
@@ -12,8 +10,7 @@ export function createTestServer() {
           }}
         </Route>
 
-        <UserRoutes />
-        <PostRoutes />
+        {Routes ? <Routes children={undefined} /> : null}
       </App>
     )
   }

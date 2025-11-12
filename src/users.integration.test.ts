@@ -2,12 +2,13 @@ import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import request from "supertest";
 import { createTestServer } from "./__tests__/helpers/testServer.js";
 import type { Server } from "http";
+import { UserRoutes } from "./users.js";
 
 describe("User Routes Integration Tests", () => {
   let server: Server;
 
   beforeAll(() => {
-    server = createTestServer();
+    server = createTestServer(UserRoutes);
   });
 
   afterAll(() => {
