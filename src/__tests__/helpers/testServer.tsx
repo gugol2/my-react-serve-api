@@ -1,10 +1,11 @@
-import { App, RouteGroup, serve } from 'react-serve-js'
+import { JSX } from 'react'
+import { App, serve } from 'react-serve-js'
 
-export function createTestServer (Routes: typeof RouteGroup) {
+export function createTestServer (Routes: () => JSX.Element) {
   function Backend () {
     return (
       <App port={0} parseBody={true}>
-        <Routes children={undefined} />
+        <Routes />
       </App>
     )
   }
