@@ -18,6 +18,10 @@ const searchUsers = (query: string) => {
   )
 }
 
+const findUserById = (id: number) => {
+  return users.find(user => user.id === id)
+}
+
 export const UserRoutes = () => {
   return (
     <RouteGroup prefix='/users'>
@@ -34,7 +38,7 @@ export const UserRoutes = () => {
       <Route path='/:id' method='GET' middleware={requestTimingMiddleware}>
         {async () => {
           const { params } = useRoute()
-          const user = users.find(u => u.id === Number(params.id))
+          const user = findUserById(Number(params.id))
 
           const startTime = useContext('startTime')
           const duration = Date.now() - startTime
