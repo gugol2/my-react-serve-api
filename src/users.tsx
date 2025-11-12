@@ -7,19 +7,21 @@ import {
 } from 'react-serve-js'
 import { requestTimingMiddleware } from './middleware/requestTimingMiddleware.js'
 
-const users = [
+const dbUsers = [
   { id: 1, name: 'John Doe', email: 'john@example.com' },
   { id: 2, name: 'Jane Smith', email: 'jane@example.com' }
 ]
 
 const searchUsers = (query: string) => {
-  return users.filter(user =>
-    user.name.toLowerCase().includes(query.toLowerCase())
-  )
+  return query
+    ? dbUsers.filter(user =>
+        user.name.toLowerCase().includes(query.toLowerCase())
+      )
+    : dbUsers
 }
 
 const findUserById = (id: number) => {
-  return users.find(user => user.id === id)
+  return dbUsers.find(user => user.id === id)
 }
 
 export const UserRoutes = () => {
@@ -28,10 +30,7 @@ export const UserRoutes = () => {
       <Route path='/' method='GET'>
         {async () => {
           const { query } = useRoute()
-          if (query.q) {
-            return <Response json={{ users: searchUsers(query.q) }} />
-          }
-          return <Response json={{ users }} />
+          return <Response json={{ users: searchUsers(query.q) }} />
         }}
       </Route>
 
