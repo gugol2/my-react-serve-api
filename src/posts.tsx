@@ -7,7 +7,7 @@ import {
 } from 'react-serve-js'
 import { loggingMiddleware } from './middleware/loggingMiddleware.js'
 
-const posts = [
+const dbPosts = [
   { id: 1, title: 'First Post', content: 'This is the first post.', userId: 1 },
   {
     id: 2,
@@ -18,11 +18,17 @@ const posts = [
 ]
 
 const searchPosts = (query: string) => {
-  return posts.filter(
-    post =>
-      post.title.toLowerCase().includes(query.toLowerCase()) ||
-      post.content.toLowerCase().includes(query.toLowerCase())
-  )
+  return query
+    ? dbPosts.filter(
+        post =>
+          post.title.toLowerCase().includes(query.toLowerCase()) ||
+          post.content.toLowerCase().includes(query.toLowerCase())
+      )
+    : dbPosts
+}
+
+const findPostById = (id: number) => {
+  return dbPosts.find(post => post.id === id)
 }
 
 export const PostRoutes = () => {
@@ -33,16 +39,13 @@ export const PostRoutes = () => {
       <Route path='/' method='GET'>
         {async () => {
           const { query } = useRoute()
-          if (query.q) {
-            return <Response json={{ posts: searchPosts(query.q) }} />
-          }
-          return <Response json={{ posts }} />
+          return <Response json={{ posts: searchPosts(query.q) }} />
         }}
       </Route>
       <Route path='/:id' method='GET'>
         {async () => {
           const { params } = useRoute()
-          const post = posts.find(p => p.id === Number(params.id))
+          const post = findPostById(Number(params.id))
 
           return post ? (
             <Response json={post} />
