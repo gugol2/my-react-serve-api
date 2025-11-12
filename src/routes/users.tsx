@@ -5,8 +5,8 @@ import {
   useContext,
   useRoute
 } from 'react-serve-js'
-import { requestTimingMiddleware } from './middleware/requestTimingMiddleware.js'
-import { searchUsers, findUserById } from './state/user.js'
+import { requestTimingMiddleware } from '../middleware/requestTimingMiddleware.js'
+import { searchUsers, findUserById } from '../state/user.js'
 
 export const UserRoutes = () => {
   return (
