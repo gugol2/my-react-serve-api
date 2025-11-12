@@ -2,7 +2,7 @@ import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import request from "supertest";
 import { createTestServer } from "../__tests__/helpers/testServer.js";
 import type { Server } from "http";
-import { PostRoutes } from "./posts.js";
+import { PostRoutes } from "./post.js";
 
 describe("Post Routes Integration Tests", () => {
   let server: Server;
