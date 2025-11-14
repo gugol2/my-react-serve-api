@@ -3,7 +3,7 @@ import request from "supertest";
 import { createTestServer } from "../__tests__/helpers/testServer.js";
 import type { Server } from "http";
 import { TodoRoutes } from "./todo.js";
-import * as todoDI from "../infrastructure/di.js";
+import * as todoDI from "../infrastructure/todo.di.js";
 
 describe("Todo Routes Integration Tests", () => {
   let server: Server;
