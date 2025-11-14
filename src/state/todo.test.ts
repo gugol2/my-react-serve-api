@@ -1,12 +1,34 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import {
-  getAllTodos,
-  findTodoById,
-  createNewTodo,
-  findTodoIndexById,
-  editTodo,
-  deleteTodo,
-} from "./todo.js";
+import { createTodoService } from "./todo.js";
+
+const mockedTodos = [
+  { id: 1, title: "Learn React", completed: false },
+  { id: 2, title: "Try react-serve", completed: false },
+];
+
+let testTodos: Array<{ id: number; title: string; completed: boolean }>;
+let getAllTodos: ReturnType<typeof createTodoService>["getAllTodos"];
+let findTodoById: ReturnType<typeof createTodoService>["findTodoById"];
+let createNewTodo: ReturnType<typeof createTodoService>["createNewTodo"];
+let findTodoIndexById: ReturnType<typeof createTodoService>["findTodoIndexById"];
+let editTodo: ReturnType<typeof createTodoService>["editTodo"];
+let deleteTodo: ReturnType<typeof createTodoService>["deleteTodo"];
+
+// Reset the todos array before each test
+beforeEach(() => {
+  // Create fresh test data
+  testTodos = [...mockedTodos];
+
+  // Create service with test data
+  const service = createTodoService(testTodos);
+
+  getAllTodos = service.getAllTodos;
+  findTodoById = service.findTodoById;
+  createNewTodo = service.createNewTodo;
+  findTodoIndexById = service.findTodoIndexById;
+  editTodo = service.editTodo;
+  deleteTodo = service.deleteTodo;
+});
 
 describe("getAllTodos", () => {
   it("should return all todos", () => {

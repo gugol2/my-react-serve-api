@@ -6,7 +6,7 @@ import {
   findTodoById,
   findTodoIndexById,
   getAllTodos
-} from '../state/todo.js'
+} from '../domain/todo.js'
 
 export const TodoRoutes = () => {
   return (

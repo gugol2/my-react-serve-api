@@ -5,46 +5,34 @@ type Todo = {
   completed: boolean;
 };
 
-let todos: Todo[] = [
-  { id: 1, title: "Learn React", completed: false },
-  { id: 2, title: "Try react-serve", completed: false },
-];
+export const createTodoService = (todosArray: Todo[]) => ({
+  findTodoById: (id: number) => {
+    return todosArray.find((todo) => todo.id === id);
+  },
 
-const findTodoById = (id: number) => {
-  return todos.find((todo) => todo.id === id);
-};
+  createNewTodo: (title: string) => {
+    const newTodo = {
+      id: todosArray.length + 1,
+      title,
+      completed: false,
+    };
+    todosArray.push(newTodo);
+    return newTodo;
+  },
 
-const createNewTodo = (title: string) => {
-  const newTodo = {
-    id: todos.length + 1,
-    title,
-    completed: false,
-  };
-  todos.push(newTodo);
-  return newTodo;
-};
+  findTodoIndexById: (id: string) => {
+    return todosArray.findIndex((todo) => todo.id === parseInt(id));
+  },
 
-const findTodoIndexById = (id: string) => {
-  return todos.findIndex((todo) => todo.id === parseInt(id));
-};
+  editTodo: (todoIndex: number, body: any) => {
+    todosArray[todoIndex] = { ...todosArray[todoIndex], ...body };
+  },
 
-const editTodo = (todoIndex: number, body: any) => {
-  todos[todoIndex] = { ...todos[todoIndex], ...body };
-};
+  deleteTodo: (todoIndex: number) => {
+    todosArray.splice(todoIndex, 1);
+  },
 
-const deleteTodo = (todoIndex: number) => {
-  todos.splice(todoIndex, 1);
-};
-
-const getAllTodos = () => {
-  return todos;
-};
-
-export {
-  findTodoById,
-  createNewTodo,
-  findTodoIndexById,
-  editTodo,
-  deleteTodo,
-  getAllTodos,
-};
+  getAllTodos: () => {
+    return todosArray;
+  },
+});
