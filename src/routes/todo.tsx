@@ -1,7 +1,13 @@
 import { Response, Route, RouteGroup, useRoute } from 'react-serve-js'
 
 // Mock database (in real app, use a real database)
-let todos = [
+type Todo = {
+  id: number
+  title: string
+  completed: boolean
+}
+
+let todos: Todo[] = [
   { id: 1, title: 'Learn React', completed: false },
   { id: 2, title: 'Try react-serve', completed: false }
 ]
