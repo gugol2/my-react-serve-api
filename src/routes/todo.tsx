@@ -5,7 +5,7 @@ import {
   editTodo,
   findTodoById,
   findTodoIndexById,
-  todos
+  getAllTodos
 } from '../state/todo.js'
 
 export const TodoRoutes = () => {
@@ -14,6 +14,7 @@ export const TodoRoutes = () => {
       {/* Get all todos */}
       <Route path='/todos' method='GET'>
         {async () => {
+          const todos = getAllTodos()
           return <Response json={todos} />
         }}
       </Route>
@@ -54,6 +55,7 @@ export const TodoRoutes = () => {
           }
 
           editTodo(todoIndex, body)
+          const todos = getAllTodos()
           return <Response json={todos[todoIndex]} />
         }}
       </Route>

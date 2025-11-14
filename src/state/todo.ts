@@ -36,11 +36,15 @@ const deleteTodo = (todoIndex: number) => {
   todos.splice(todoIndex, 1);
 };
 
+const getAllTodos = () => {
+  return todos;
+};
+
 export {
-  todos,
   findTodoById,
   createNewTodo,
   findTodoIndexById,
   editTodo,
   deleteTodo,
+  getAllTodos,
 };
