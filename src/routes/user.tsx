@@ -25,11 +25,10 @@ export const UserRoutes = () => {
 
           const startTime = useContext('startTime')
           const duration = Date.now() - startTime
+          const durationStr = `${duration} ms`
 
           return user ? (
-            <Response
-              json={{ user: user, meta: { duration: `${duration} ms` } }}
-            />
+            <Response json={{ user: user, meta: { duration: durationStr } }} />
           ) : (
             <Response
               status={404}
