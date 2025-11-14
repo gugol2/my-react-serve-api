@@ -1,6 +1,6 @@
 import type { Todo } from "../domain/todo.js";
 import { createInMemoryTodoRepository } from "./todoRepository.js";
-import { createTodoService } from "../state/todo.js";
+import { createTodoService } from "../aplication/todo.js";
 
 // Initial data
 const initialTodos: Todo[] = [

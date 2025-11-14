@@ -6,7 +6,7 @@ import {
   useRoute
 } from 'react-serve-js'
 import { loggingMiddleware } from '../middleware/loggingMiddleware.js'
-import { findPostById, searchPosts } from '../state/post.js'
+import { findPostById, searchPosts } from '../aplication/post.js'
 
 export const PostRoutes = () => {
   return (
