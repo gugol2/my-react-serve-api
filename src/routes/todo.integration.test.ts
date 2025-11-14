@@ -3,7 +3,7 @@ import request from "supertest";
 import { createTestServer } from "../__tests__/helpers/testServer.js";
 import type { Server } from "http";
 import { TodoRoutes } from "./todo.js";
-import * as todoDomain from "../domain/todo.js";
+import * as todoDI from "../infrastructure/di.js";
 
 describe("Todo Routes Integration Tests", () => {
   let server: Server;
@@ -154,7 +154,7 @@ describe("Todo Routes Integration Tests", () => {
       const todoId = createResponse.body.id;
 
       const deleteSpy = vi
-        .spyOn(todoDomain, "deleteTodo")
+        .spyOn(todoDI, "deleteTodo")
         .mockImplementationOnce(() => {
           throw new Error("Database error");
         });

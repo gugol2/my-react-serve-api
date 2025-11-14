@@ -1,38 +1,16 @@
-// Mock database (in real app, use a real database)
-type Todo = {
-  id: number;
-  title: string;
-  completed: boolean;
-};
+import type { TodoRepository } from "../infrastructure/todoRepository.js";
 
-export const createTodoService = (todosArray: Todo[]) => ({
-  findTodoById: (id: number) => {
-    return todosArray.find((todo) => todo.id === id);
-  },
+// Application service (use cases)
+export const createTodoService = (repository: TodoRepository) => ({
+  getAllTodos: () => repository.findAll(),
 
-  createNewTodo: (title: string) => {
-    const newTodo = {
-      id: todosArray.length + 1,
-      title,
-      completed: false,
-    };
-    todosArray.push(newTodo);
-    return newTodo;
-  },
+  findTodoById: (id: number) => repository.findById(id),
 
-  findTodoIndexById: (id: string) => {
-    return todosArray.findIndex((todo) => todo.id === parseInt(id));
-  },
+  findTodoIndexById: (id: string) => repository.findIndexById(parseInt(id)),
 
-  editTodo: (todoIndex: number, body: any) => {
-    todosArray[todoIndex] = { ...todosArray[todoIndex], ...body };
-  },
+  createNewTodo: (title: string) => repository.create(title),
 
-  deleteTodo: (todoIndex: number) => {
-    todosArray.splice(todoIndex, 1);
-  },
+  editTodo: (todoIndex: number, body: any) => repository.update(todoIndex, body),
 
-  getAllTodos: () => {
-    return todosArray;
-  },
+  deleteTodo: (todoIndex: number) => repository.delete(todoIndex),
 });

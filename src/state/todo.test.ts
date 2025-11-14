@@ -1,12 +1,13 @@
 import { describe, it, expect, beforeEach } from "vitest";
+import type { Todo } from "../domain/todo.js";
+import { createInMemoryTodoRepository } from "../infrastructure/todoRepository.js";
 import { createTodoService } from "./todo.js";
 
-const mockedTodos = [
+const mockedTodos: Todo[] = [
   { id: 1, title: "Learn React", completed: false },
   { id: 2, title: "Try react-serve", completed: false },
 ];
 
-let testTodos: Array<{ id: number; title: string; completed: boolean }>;
 let getAllTodos: ReturnType<typeof createTodoService>["getAllTodos"];
 let findTodoById: ReturnType<typeof createTodoService>["findTodoById"];
 let createNewTodo: ReturnType<typeof createTodoService>["createNewTodo"];
@@ -17,10 +18,11 @@ let deleteTodo: ReturnType<typeof createTodoService>["deleteTodo"];
 // Reset the todos array before each test
 beforeEach(() => {
   // Create fresh test data
-  testTodos = [...mockedTodos];
+  const testTodos = [...mockedTodos];
 
-  // Create service with test data
-  const service = createTodoService(testTodos);
+  // Create repository and service with test data
+  const repository = createInMemoryTodoRepository(testTodos);
+  const service = createTodoService(repository);
 
   getAllTodos = service.getAllTodos;
   findTodoById = service.findTodoById;
