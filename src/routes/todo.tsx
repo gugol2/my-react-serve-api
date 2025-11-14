@@ -24,6 +24,14 @@ const findTodoIndexById = (id: string) => {
   return todos.findIndex(todo => todo.id === parseInt(id))
 }
 
+const editTodo = (todoIndex: number, body: any) => {
+  todos[todoIndex] = { ...todos[todoIndex], ...body }
+}
+
+const deleteTodo = (todoIndex: number) => {
+  todos.splice(todoIndex, 1)
+}
+
 export const TodoRoutes = () => {
   return (
     <RouteGroup>
@@ -69,7 +77,7 @@ export const TodoRoutes = () => {
             return <Response status={404} json={{ error: 'Todo not found' }} />
           }
 
-          todos[todoIndex] = { ...todos[todoIndex], ...body }
+          editTodo(todoIndex, body)
           return <Response json={todos[todoIndex]} />
         }}
       </Route>
@@ -84,7 +92,7 @@ export const TodoRoutes = () => {
             return <Response status={404} json={{ error: 'Todo not found' }} />
           }
 
-          todos.splice(todoIndex, 1)
+          deleteTodo(todoIndex)
           return <Response status={204} json={null} />
         }}
       </Route>
