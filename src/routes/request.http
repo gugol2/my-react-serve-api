@@ -1,0 +1,46 @@
+#### Deposit
+GET http://localhost:6969
+
+###
+GET http://localhost:6969/health
+
+### Get All Users
+GET http://localhost:6969/users
+
+### Get User by ID
+GET http://localhost:6969/users/1
+
+### Get all Posts
+GET http://localhost:6969/posts
+
+### Get Post by ID
+GET http://localhost:6969/posts/1 
+
+### Get all Todos
+GET http://localhost:6969/todos
+
+### Get Todo by ID
+GET http://localhost:6969/todos/1
+
+### Create Todo
+POST http://localhost:6969/todos
+Content-Type: application/json  
+
+{
+    "title": "New Todo Item",
+    "completed": false
+}                   
+
+### Update Todo
+PUT http://localhost:6969/todos/3
+Content-Type: application/json      
+
+{
+    "title": "Updated Todo Item",
+    "completed": true
+}
+
+### Delete Todo
+DELETE http://localhost:6969/todos/3        
+
+
