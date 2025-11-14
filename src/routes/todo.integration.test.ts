@@ -1,8 +1,9 @@
-import { describe, it, expect, beforeAll, afterAll } from "vitest";
+import { describe, it, expect, beforeAll, afterAll, vi } from "vitest";
 import request from "supertest";
 import { createTestServer } from "../__tests__/helpers/testServer.js";
 import type { Server } from "http";
 import { TodoRoutes } from "./todo.js";
+import * as todoState from "../state/todo.js";
 
 describe("Todo Routes Integration Tests", () => {
   let server: Server;
@@ -72,9 +73,7 @@ describe("Todo Routes Integration Tests", () => {
     });
 
     it("should create todo with empty title", async () => {
-      const response = await request(server)
-        .post("/todos")
-        .send({ title: "" });
+      const response = await request(server).post("/todos").send({ title: "" });
 
       expect(response.status).toBe(201);
       expect(response.body.title).toBe("");
@@ -145,6 +144,28 @@ describe("Todo Routes Integration Tests", () => {
       const response = await request(server).get("/todos/2");
 
       expect(response.status).toBe(404);
+    });
+
+    it("should return an error when failing to delete a todo", async () => {
+      // First create a new todo to delete
+      const createResponse = await request(server)
+        .post("/todos")
+        .send({ title: "Todo to fail deletion" });
+      const todoId = createResponse.body.id;
+
+      const deleteSpy = vi
+        .spyOn(todoState, "deleteTodo")
+        .mockImplementationOnce(() => {
+          throw new Error("Database error");
+        });
+
+      const response = await request(server).delete(`/todos/${todoId}`);
+
+      expect(response.status).toBe(500);
+      expect(response.body.error).toContain("Failed to delete todo");
+      expect(response.body.errorMessage).toBe("Database error");
+
+      deleteSpy.mockRestore();
     });
   });
 });

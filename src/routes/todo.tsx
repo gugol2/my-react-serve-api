@@ -68,8 +68,20 @@ export const TodoRoutes = () => {
             return <Response status={404} json={{ error: 'Todo not found' }} />
           }
 
-          deleteTodo(todoIndex)
-          return <Response status={204} json={null} />
+          try {
+            deleteTodo(todoIndex)
+            return <Response status={204} json={null} />
+          } catch (error) {
+            return (
+              <Response
+                status={500}
+                json={{
+                  error: `Failed to delete todo: ${todoIndex}`,
+                  errorMessage: (error as Error).message
+                }}
+              />
+            )
+          }
         }}
       </Route>
     </RouteGroup>
