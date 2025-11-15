@@ -1,9 +1,9 @@
 import { App, serve } from 'react-serve-js'
-import { PostRoutes } from './routes/post.js'
-import { RootRoutes } from './routes/root.js'
-import { UserRoutes } from './routes/user.js'
-import { HealthRoutes } from './routes/health.js'
-import { TodoRoutes } from './routes/todo.js'
+import { PostRoutes } from './adapters/http/routes/post.js'
+import { RootRoutes } from './adapters/http/routes/root.js'
+import { UserRoutes } from './adapters/http/routes/user.js'
+import { HealthRoutes } from './adapters/http/routes/health.js'
+import { TodoRoutes } from './adapters/http/routes/todo.js'
 
 function Backend () {
   return (

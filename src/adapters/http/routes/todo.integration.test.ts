@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeAll, afterAll, vi } from "vitest";
 import request from "supertest";
-import { createTestServer } from "../__tests__/helpers/testServer.js";
+import { createTestServer } from "../../../__tests__/helpers/testServer.js";
 import type { Server } from "http";
 import { TodoRoutes } from "./todo.js";
-import * as todoDI from "../infrastructure/di/todo.di.js";
+import * as todoDI from "../../../infrastructure/di/todo.di.js";
 
 describe("Todo Routes Integration Tests", () => {
   let server: Server;
