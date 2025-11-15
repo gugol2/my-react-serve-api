@@ -1,16 +1,7 @@
 import type { Todo } from "../domain/todo.js";
+import type { TodoRepository } from "../aplication/ports/todoRepository.port.js";
 
-// Repository interface (port)
-export type TodoRepository = {
-  findAll: () => Todo[];
-  findById: (id: number) => Todo | undefined;
-  findIndexById: (id: number) => number;
-  create: (title: string) => Todo;
-  update: (index: number, updates: Partial<Todo>) => void;
-  delete: (index: number) => void;
-};
-
-// In-memory implementation (adapter)
+// In-memory repository implementation (adapter)
 export const createInMemoryTodoRepository = (todos: Todo[]): TodoRepository => ({
   findAll: () => todos,
 

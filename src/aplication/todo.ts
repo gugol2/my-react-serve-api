@@ -1,4 +1,4 @@
-import type { TodoRepository } from "../infrastructure/todoRepository.js";
+import type { TodoRepository } from "./ports/todoRepository.port.js";
 
 // Application service (use cases)
 export const createTodoService = (repository: TodoRepository) => ({
