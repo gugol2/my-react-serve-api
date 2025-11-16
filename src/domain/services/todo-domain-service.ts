@@ -9,6 +9,7 @@ import {
   UpdateTodoInput,
 } from "../entities/todo.js";
 import { DomainError, Result } from "../errors/domain-errors.js";
+import { generateId } from "../helper/generate-id.js";
 import {
   validateDescription,
   validateTitle,
@@ -40,11 +41,6 @@ export const createTodo = (
       updatedAt: now,
     },
   };
-};
-
-// Helper to generate IDs (in real app, use UUID library)
-const generateId = (): TodoId => {
-  return `todo_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 };
 
 // Function to merge updates into existing todo
