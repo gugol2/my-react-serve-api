@@ -19,6 +19,9 @@ export type HttpResponse<T = unknown> = {
   body: T;
 };
 
+// Export the controller type for use elsewhere
+export type TodoController = ReturnType<typeof createTodoController>;
+
 // HTTP Controller functions (pure functions)
 export const createTodoController = (service: TodoService) => {
   return {

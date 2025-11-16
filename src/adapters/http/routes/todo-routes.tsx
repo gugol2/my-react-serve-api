@@ -1,10 +1,7 @@
 import { Route, RouteGroup, Response, useRoute } from 'react-serve-js'
-import { createApp } from '../../../create-app.js'
+import { TodoController } from '../todo-controller.js'
 
-const app = createApp()
-const { controller } = app
-
-export const TodoRoutes = () => {
+export const TodoRoutes = ({ controller }: { controller: TodoController }) => {
   return (
     <RouteGroup>
       {/* Get all todos */}
