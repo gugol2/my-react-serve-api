@@ -13,7 +13,7 @@ Both implementations follow **functional programming** principles (no classes, p
 
 ## 📂 Repository Structure
 
-This repository contains **both implementations in the main branch** for easy side-by-side comparison:
+This repository contains **both implementations for easy side-by-side comparison**:
 
 ```
 my-react-serve-api/
@@ -32,16 +32,6 @@ my-react-serve-api/
 │
 ├── CORE-PRINCIPLES-IMPLEMENTATION.md  # Detailed principle comparisons
 └── README.md                     # This file
-```
-
-**Alternative:** You can also switch between branches to see each implementation in isolation:
-
-```bash
-# Hexagonal Architecture implementation
-git checkout hexagonal-architecture
-
-# Clean Architecture implementation
-git checkout clean-architecture
 ```
 
 ## 🏗️ Architecture Comparison
@@ -160,7 +150,7 @@ cd my-react-serve-api
 
 2. **Explore both implementations side by side**
 
-On the `main` branch, you can view both architectures simultaneously:
+You can view both architectures simultaneously:
 
 ```bash
 # View Hexagonal Architecture
@@ -179,18 +169,17 @@ diff hexagonal-architecture/src/create-app.ts clean-architecture/src/create-app.
 cat CORE-PRINCIPLES-IMPLEMENTATION.md
 ```
 
-4. **Run either implementation** (switch to respective branch)
+4. **Run either implementation**
 
 ```bash
-# Try Hexagonal Architecture
-git checkout hexagonal-architecture
+# Install dependencies (only once)
 npm install
-npm run dev
 
-# OR Try Clean Architecture
-git checkout clean-architecture
-npm install
-npm run dev
+# Run Hexagonal Architecture
+npm run dev:hexagonal
+
+# OR Run Clean Architecture
+npm run dev:clean
 ```
 
 ## 📡 API Endpoints (Same in Both)
@@ -216,12 +205,24 @@ curl -X POST http://localhost:6969/todos \
 
 ## 🧪 Scripts
 
-- `npm run dev` - Start development server with hot reload
-- `npm run debug` - Start with debugger (port 9229)
-- `npm run build` - Build the application
-- `npm run start` - Start production server
-- `npm run typecheck` - TypeScript type checking
+### Run Implementations
+- `npm run dev:hexagonal` - Start Hexagonal Architecture with hot reload
+- `npm run dev:clean` - Start Clean Architecture with hot reload
+- `npm run start:hexagonal` - Start Hexagonal Architecture (production)
+- `npm run start:clean` - Start Clean Architecture (production)
+
+### Debug
+- `npm run debug:hexagonal` - Debug Hexagonal Architecture (port 9229)
+- `npm run debug:clean` - Debug Clean Architecture (port 9229)
+
+### Build & Type Check
+- `npm run build` - Build both implementations
+- `npm run typecheck` - Type check both implementations
+
+### Testing
 - `npm run test` - Run unit tests
+- `npm run test:ui` - Run tests with UI
+- `npm run test:coverage` - Run tests with coverage
 
 ## 🧰 Tech Stack
 

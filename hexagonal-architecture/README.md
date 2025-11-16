@@ -11,50 +11,6 @@ This project demonstrates a **hexagonal architecture** (also known as ports and 
 - **Adapters Layer**: HTTP controllers and persistence implementations
 - **Functional approach**: No classes, factory functions, and immutable data structures
 
-## 🚀 Getting Started
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Start the development server:
-
-```bash
-npm run dev
-```
-
-Your API will be running at http://localhost:6969
-
-## 📡 Available Endpoints
-
-### Health Check
-- `GET /` - Welcome message
-
-### Todos
-- `GET /todos` - List all todos
-- `GET /todos/:id` - Get todo by ID
-- `POST /todos` - Create a new todo
-- `PUT /todos/:id` - Update a todo
-- `DELETE /todos/:id` - Delete a todo
-
-### Request/Response Examples
-
-**Create a todo:**
-```bash
-curl -X POST http://localhost:6969/todos \
-  -H "Content-Type: application/json" \
-  -d '{
-    "title": "Learn Hexagonal Architecture",
-    "description": "Study the principles of ports and adapters"
-  }'
-```
-
-**Get all todos:**
-```bash
-curl http://localhost:6969/todos
-```
 
 ## 📁 Project Structure
 
@@ -103,15 +59,6 @@ src/
 - ✅ **Domain-Driven Design**: Rich domain model with validations
 - ✅ **Immutable Data**: Readonly types throughout
 - ✅ **Testing**: Unit tests for domain logic
-
-## 🧪 Scripts
-
-- `npm run dev` - Start development server with hot reload
-- `npm run debug` - Start development server with debugger (port 9229)
-- `npm run build` - Build the application
-- `npm run start` - Start production server
-- `npm run typecheck` - Run TypeScript type checking
-- `npm run test` - Run unit tests
 
 ## 🧰 Tech Stack
 
