@@ -1,4 +1,4 @@
-# Todo API - Clean Architecture
+# Todo API - Clean Architecture (Uncle Bob)
 
 A REST API built with [react-serve-js](https://github.com/react-serve/react-serve-js) and TypeScript, following **Clean Architecture** principles by Uncle Bob.
 
@@ -76,14 +76,6 @@ src/
 - ✅ **Domain-Driven Design**: Rich domain model with validations
 - ✅ **Immutable Data**: Readonly types throughout
 - ✅ **Testing**: Full test coverage across all layers
-
-## 🧰 Tech Stack
-
-- **Runtime**: Node.js
-- **Language**: TypeScript
-- **Framework**: react-serve-js
-- **Testing**: Vitest
-- **Architecture**: Clean Architecture (Uncle Bob)
 
 ## 📚 Learn More
 

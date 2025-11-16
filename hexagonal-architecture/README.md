@@ -1,4 +1,4 @@
-# Todo API - Hexagonal Architecture
+# Todo API - Hexagonal Architecture (Ports & Adapters)
 
 A clean architecture REST API built with [react-serve-js](https://github.com/react-serve/react-serve-js) and TypeScript, following hexagonal architecture (ports and adapters) principles.
 
@@ -58,15 +58,7 @@ src/
 - ✅ **Port/Adapter Pattern**: Easy to swap implementations
 - ✅ **Domain-Driven Design**: Rich domain model with validations
 - ✅ **Immutable Data**: Readonly types throughout
-- ✅ **Testing**: Unit tests for domain logic
-
-## 🧰 Tech Stack
-
-- **Runtime**: Node.js
-- **Language**: TypeScript
-- **Framework**: react-serve-js
-- **Testing**: Vitest
-- **Architecture**: Hexagonal (Ports & Adapters)
+- ✅ **Testing**: Unit tests for domain logic 
 
 ## 📚 Learn More
 
