@@ -11,9 +11,30 @@ This repository contains **two different implementations** of the same Todo API 
 
 Both implementations follow **functional programming** principles (no classes, pure functions, immutable data).
 
-## 🌿 Branches
+## 📂 Repository Structure
 
-Switch between branches to explore each architecture:
+This repository contains **both implementations in the main branch** for easy side-by-side comparison:
+
+```
+my-react-serve-api/
+├── hexagonal-architecture/       # Hexagonal Architecture implementation
+│   └── src/
+│       ├── domain/
+│       ├── application/
+│       └── adapters/
+│
+├── clean-architecture/           # Clean Architecture implementation
+│   └── src/
+│       ├── entities/
+│       ├── use-cases/
+│       ├── interface-adapters/
+│       └── frameworks/
+│
+├── CORE-PRINCIPLES-IMPLEMENTATION.md  # Detailed principle comparisons
+└── README.md                     # This file
+```
+
+**Alternative:** You can also switch between branches to see each implementation in isolation:
 
 ```bash
 # Hexagonal Architecture implementation
@@ -30,6 +51,7 @@ git checkout clean-architecture
 **3-Layer Structure:**
 
 ```
+src/
 ├── domain/          # Core business logic (center of hexagon)
 ├── application/     # Use cases and ports (interfaces)
 └── adapters/        # External interfaces (HTTP, DB, etc.)
@@ -41,7 +63,7 @@ git checkout clean-architecture
 - **Domain**: Pure business logic, isolated from infrastructure
 - **Symmetry**: Primary ports (driving) and secondary ports (driven)
 
-**Folder Structure (see `hexagonal-architecture` branch):**
+**Folder Structure (see `hexagonal-architecture/src/`):**
 ```
 src/
 ├── domain/
@@ -76,7 +98,7 @@ src/
 - **DTOs**: Data Transfer Objects to enforce layer boundaries
 - **Concentric Circles**: Explicit layer hierarchy
 
-**Folder Structure (see `clean-architecture` branch):**
+**Folder Structure (see `clean-architecture/src/`):**
 ```
 src/
 ├── entities/                     # Layer 1
@@ -136,27 +158,40 @@ git clone <your-repo-url>
 cd my-react-serve-api
 ```
 
-2. **Install dependencies**
+2. **Explore both implementations side by side**
+
+On the `main` branch, you can view both architectures simultaneously:
+
 ```bash
-npm install
+# View Hexagonal Architecture
+ls -R hexagonal-architecture/src/
+
+# View Clean Architecture
+ls -R clean-architecture/src/
+
+# Compare specific files side by side
+diff hexagonal-architecture/src/create-app.ts clean-architecture/src/create-app.ts
 ```
 
-3. **Choose a branch and explore**
+3. **Read the detailed comparison**
 ```bash
-# Hexagonal Architecture
+# Read core principles implementation
+cat CORE-PRINCIPLES-IMPLEMENTATION.md
+```
+
+4. **Run either implementation** (switch to respective branch)
+
+```bash
+# Try Hexagonal Architecture
 git checkout hexagonal-architecture
+npm install
 npm run dev
 
-# OR Clean Architecture
+# OR Try Clean Architecture
 git checkout clean-architecture
+npm install
 npm run dev
 ```
-
-4. **Compare the implementations**
-- Check folder structures
-- Read use case implementations
-- Examine dependency directions
-- Run tests: `npm test`
 
 ## 📡 API Endpoints (Same in Both)
 
