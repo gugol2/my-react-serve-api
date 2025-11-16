@@ -4,11 +4,24 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "node",
-    include: ["src/**/*.test.{ts,tsx}", "src/**/*.integration.test.{ts,tsx}"],
+    include: [
+      "hexagonal-architecture/src/**/*.test.{ts,tsx}",
+      "hexagonal-architecture/src/**/*.integration.test.{ts,tsx}",
+      "clean-architecture/src/**/*.test.{ts,tsx}",
+      "clean-architecture/src/**/*.integration.test.{ts,tsx}",
+    ],
     coverage: {
       provider: "v8",
-      include: ["src/**/*.{ts,tsx}"],
-      exclude: ["src/**/*.test.{ts,tsx}", "src/**/*.integration.test.{ts,tsx}"],
+      include: [
+        "hexagonal-architecture/src/**/*.{ts,tsx}",
+        "clean-architecture/src/**/*.{ts,tsx}",
+      ],
+      exclude: [
+        "hexagonal-architecture/src/**/*.test.{ts,tsx}",
+        "hexagonal-architecture/src/**/*.integration.test.{ts,tsx}",
+        "clean-architecture/src/**/*.test.{ts,tsx}",
+        "clean-architecture/src/**/*.integration.test.{ts,tsx}",
+      ],
       // all: true,
     },
   },
