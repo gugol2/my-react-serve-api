@@ -9,9 +9,11 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "allowSyntheticDefaultImports": true,
-    "outDir": "./dist",
-    "rootDir": "./src"
+    "outDir": "./dist"
   },
-  "include": ["src/**/*"],
+  "include": [
+    "hexagonal-architecture/src/**/*",
+    "clean-architecture/src/**/*"
+  ],
   "exclude": ["node_modules", "dist"]
 }
