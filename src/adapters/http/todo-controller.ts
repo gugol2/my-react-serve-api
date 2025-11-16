@@ -20,10 +20,18 @@ export type HttpResponse<T = unknown> = {
 };
 
 // Export the controller type for use elsewhere
-export type TodoController = ReturnType<typeof createTodoController>;
+// export type TodoController = ReturnType<typeof createTodoController>;
+
+export interface TodoController {
+  getAllTodos: () => Promise<HttpResponse<Todo[]>>;
+  getTodoById: (req: HttpRequest) => Promise<HttpResponse>;
+  createTodo: (req: HttpRequest) => Promise<HttpResponse>;
+  updateTodo: (req: HttpRequest) => Promise<HttpResponse>;
+  deleteTodo: (req: HttpRequest) => Promise<HttpResponse>;
+}
 
 // HTTP Controller functions (pure functions)
-export const createTodoController = (service: TodoService) => {
+export const createTodoController = (service: TodoService): TodoController => {
   return {
     getAllTodos: async (): Promise<HttpResponse<Todo[]>> => {
       const todos = await service.getAllTodos();
