@@ -1,134 +1,226 @@
-# Todo API - Hexagonal Architecture
+# Hexagonal Architecture vs Clean Architecture - Comparison
 
-A clean architecture REST API built with [react-serve-js](https://github.com/react-serve/react-serve-js) and TypeScript, following hexagonal architecture (ports and adapters) principles.
+A REST API built with [react-serve-js](https://github.com/react-serve/react-serve-js) and TypeScript, demonstrating the differences between **Hexagonal Architecture** and **Clean Architecture**.
 
-## 🏗️ Architecture
+## 🎯 Purpose
 
-This project demonstrates a **hexagonal architecture** (also known as ports and adapters) with functional programming patterns:
+This repository contains **two different implementations** of the same Todo API to help you understand the practical differences between:
 
-- **Domain Layer**: Pure business logic, entities, and validations
-- **Application Layer**: Use cases and port definitions (interfaces)
-- **Adapters Layer**: HTTP controllers and persistence implementations
-- **Functional approach**: No classes, factory functions, and immutable data structures
+1. **Hexagonal Architecture** (Ports & Adapters)
+2. **Clean Architecture** (Uncle Bob's 4-Layer Architecture)
+
+Both implementations follow **functional programming** principles (no classes, pure functions, immutable data).
+
+## 🌿 Branches
+
+Switch between branches to explore each architecture:
+
+```bash
+# Hexagonal Architecture implementation
+git checkout hexagonal-architecture
+
+# Clean Architecture implementation
+git checkout clean-architecture
+```
+
+## 🏗️ Architecture Comparison
+
+### Hexagonal Architecture (Ports & Adapters)
+
+**3-Layer Structure:**
+
+```
+├── domain/          # Core business logic (center of hexagon)
+├── application/     # Use cases and ports (interfaces)
+└── adapters/        # External interfaces (HTTP, DB, etc.)
+```
+
+**Key Concepts:**
+- **Ports**: Interfaces that define how the application communicates (input/output)
+- **Adapters**: Implementations that connect to external systems
+- **Domain**: Pure business logic, isolated from infrastructure
+- **Symmetry**: Primary ports (driving) and secondary ports (driven)
+
+**Folder Structure (see `hexagonal-architecture` branch):**
+```
+src/
+├── domain/
+│   ├── entities/
+│   ├── errors/
+│   ├── services/
+│   ├── validation/
+│   └── helper/
+├── application/
+│   ├── ports/                    # Interfaces
+│   └── services/                 # Use case implementations
+└── adapters/
+    ├── http/                     # Primary adapter (driving)
+    └── persistence/              # Secondary adapter (driven)
+```
+
+### Clean Architecture (Uncle Bob)
+
+**4-Layer Structure:**
+
+```
+├── entities/              # Layer 1: Enterprise business rules
+├── use-cases/             # Layer 2: Application business rules
+├── interface-adapters/    # Layer 3: Controllers, presenters
+└── frameworks/            # Layer 4: External tools (DB, web, etc.)
+```
+
+**Key Concepts:**
+- **Dependency Rule**: Dependencies must point INWARD only (Layer 4 → 3 → 2 → 1)
+- **Entities**: Enterprise-wide business rules
+- **Use Cases**: Application-specific business rules (individual use cases)
+- **DTOs**: Data Transfer Objects to enforce layer boundaries
+- **Concentric Circles**: Explicit layer hierarchy
+
+**Folder Structure (see `clean-architecture` branch):**
+```
+src/
+├── entities/                     # Layer 1
+│   ├── entities/
+│   ├── errors/
+│   ├── services/
+│   ├── validation/
+│   └── helper/
+├── use-cases/                    # Layer 2
+│   ├── create-todo/
+│   ├── get-all-todos/
+│   ├── get-todo-by-id/
+│   ├── update-todo/
+│   ├── delete-todo/
+│   ├── gateways/                 # Port interfaces
+│   └── dtos/                     # Re-exported types
+├── interface-adapters/           # Layer 3
+│   ├── controllers/
+│   └── presenters/
+└── frameworks/                   # Layer 4
+    ├── web/
+    └── database/
+```
+
+## 🔍 Key Differences
+
+| Aspect | Hexagonal Architecture | Clean Architecture |
+|--------|------------------------|-------------------|
+| **Layers** | 3 layers (Domain, Application, Adapters) | 4 layers (Entities, Use Cases, Interface Adapters, Frameworks) |
+| **Focus** | Port/Adapter separation | Strict dependency flow (Dependency Rule) |
+| **Use Cases** | Grouped in application/services | Individual folders per use case |
+| **Interfaces** | Ports (input/output) | Gateways + DTOs |
+| **Mental Model** | Center (domain) + symmetric adapters | Concentric circles (onion) |
+| **Layer Boundary** | Ports define boundaries | DTOs + Gateways define boundaries |
+| **Dependency Flow** | Domain ← Application ← Adapters | Layer 1 ← Layer 2 ← Layer 3 ← Layer 4 |
+| **Complexity** | Simpler, less prescriptive | More structured, stricter rules |
+
+## 📊 When to Use Each
+
+### Use Hexagonal Architecture when:
+- You want a simpler, more flexible structure
+- You need to swap adapters frequently (e.g., different databases, APIs)
+- Team is smaller or less experienced with architectural patterns
+- Project scope is well-defined and medium-sized
+
+### Use Clean Architecture when:
+- You need strict separation of business rules (enterprise vs application)
+- Large team working on complex enterprise applications
+- Multiple applications sharing the same domain logic
+- You want explicit, enforceable dependency rules
 
 ## 🚀 Getting Started
 
-Install dependencies:
+1. **Clone the repository**
+```bash
+git clone <your-repo-url>
+cd my-react-serve-api
+```
 
+2. **Install dependencies**
 ```bash
 npm install
 ```
 
-Start the development server:
-
+3. **Choose a branch and explore**
 ```bash
+# Hexagonal Architecture
+git checkout hexagonal-architecture
+npm run dev
+
+# OR Clean Architecture
+git checkout clean-architecture
 npm run dev
 ```
 
-Your API will be running at http://localhost:6969
+4. **Compare the implementations**
+- Check folder structures
+- Read use case implementations
+- Examine dependency directions
+- Run tests: `npm test`
 
-## 📡 Available Endpoints
+## 📡 API Endpoints (Same in Both)
 
-### Health Check
+Both implementations expose identical REST APIs:
+
 - `GET /` - Welcome message
-
-### Todos
 - `GET /todos` - List all todos
 - `GET /todos/:id` - Get todo by ID
 - `POST /todos` - Create a new todo
 - `PUT /todos/:id` - Update a todo
 - `DELETE /todos/:id` - Delete a todo
 
-### Request/Response Examples
-
-**Create a todo:**
+**Example:**
 ```bash
 curl -X POST http://localhost:6969/todos \
   -H "Content-Type: application/json" \
   -d '{
-    "title": "Learn Hexagonal Architecture",
-    "description": "Study the principles of ports and adapters"
+    "title": "Learn Architecture Patterns",
+    "description": "Compare Hexagonal and Clean Architecture"
   }'
 ```
-
-**Get all todos:**
-```bash
-curl http://localhost:6969/todos
-```
-
-## 📁 Project Structure
-
-```
-src/
-├── domain/                      # Domain layer (core business logic)
-│   ├── entities/
-│   │   └── todo.ts             # Domain entities and types
-│   ├── errors/
-│   │   └── domain-errors.ts    # Domain-specific errors
-│   ├── services/
-│   │   └── todo-domain-service.ts  # Domain services
-│   ├── validation/
-│   │   └── todo-validation.ts  # Business rules validation
-│   └── helper/
-│       └── generate-id.ts      # Domain utilities
-│
-├── application/                 # Application layer (use cases)
-│   ├── ports/
-│   │   ├── todo-repository.ts  # Repository port (interface)
-│   │   └── todo-service.ts     # Service port (interface)
-│   └── services/
-│       └── todo-service-impl.ts  # Service implementation
-│
-├── adapters/                    # Adapters layer (external interfaces)
-│   ├── http/
-│   │   ├── routes/
-│   │   │   └── todo-routes.tsx # HTTP routes (react-serve)
-│   │   └── todo-controller.ts  # HTTP controller
-│   └── persistence/
-│       ├── in-memory-repository.ts  # In-memory implementation
-│       └── seed-data.ts        # Initial data
-│
-├── create-app.ts               # Composition root (DI)
-└── index.tsx                   # Application entry point
-```
-
-## 🎯 Key Features
-
-- ✅ **Hexagonal Architecture**: Clean separation of concerns
-- ✅ **Functional Programming**: Pure functions, no classes
-- ✅ **Type Safety**: Full TypeScript with strict mode
-- ✅ **Result Type Pattern**: Explicit error handling (no exceptions)
-- ✅ **Dependency Injection**: Manual DI with factory functions
-- ✅ **Port/Adapter Pattern**: Easy to swap implementations
-- ✅ **Domain-Driven Design**: Rich domain model with validations
-- ✅ **Immutable Data**: Readonly types throughout
-- ✅ **Testing**: Unit tests for domain logic
 
 ## 🧪 Scripts
 
 - `npm run dev` - Start development server with hot reload
-- `npm run debug` - Start development server with debugger (port 9229)
+- `npm run debug` - Start with debugger (port 9229)
 - `npm run build` - Build the application
 - `npm run start` - Start production server
-- `npm run typecheck` - Run TypeScript type checking
+- `npm run typecheck` - TypeScript type checking
 - `npm run test` - Run unit tests
 
 ## 🧰 Tech Stack
 
 - **Runtime**: Node.js
-- **Language**: TypeScript
+- **Language**: TypeScript (strict mode)
 - **Framework**: react-serve-js
 - **Testing**: Vitest
-- **Architecture**: Hexagonal (Ports & Adapters)
+- **Patterns**: Functional Programming (no classes)
 
 ## 📚 Learn More
 
-### Architecture & Patterns
-- [Hexagonal Architecture](https://alistair.cockburn.us/hexagonal-architecture/)
-- [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
-- [Domain-Driven Design](https://martinfowler.com/bliki/DomainDrivenDesign.html)
+### Architecture Patterns
+- [Hexagonal Architecture](https://alistair.cockburn.us/hexagonal-architecture/) - Alistair Cockburn
+- [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) - Uncle Bob's article
+- [Clean Architecture Book](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164) - Robert C. Martin
+- [Domain-Driven Design](https://martinfowler.com/bliki/DomainDrivenDesign.html) - Martin Fowler
 
-### Libraries
-- [react-serve-js Documentation](https://github.com/react-serve/react-serve-js)
-- [TypeScript Documentation](https://www.typescriptlang.org/)
-- [Vitest Documentation](https://vitest.dev/)
+### Comparison Articles
+- [Hexagonal vs Clean Architecture](https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/)
+- [Ports and Adapters Pattern](https://jmgarridopaz.github.io/content/hexagonalarchitecture.html)
+
+### Framework Documentation
+- [react-serve-js](https://github.com/react-serve/react-serve-js)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vitest](https://vitest.dev/)
+
+## 💡 Key Takeaways
+
+1. **Both architectures** achieve the same goal: **decoupling business logic from infrastructure**
+2. **Hexagonal** is more flexible and easier to grasp initially
+3. **Clean Architecture** provides stricter rules and better scalability for large projects
+4. **Both work great** with functional programming patterns
+5. **Choose based on** your team size, project complexity, and preference for structure vs flexibility
+
+---
+
+**Ready to explore?** Switch to `hexagonal-architecture` or `clean-architecture` branch and compare the implementations side by side!
