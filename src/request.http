@@ -1,0 +1,28 @@
+@todoId = todo_1
+
+### Get all todos
+GET http://localhost:6969/todos
+
+### Get a todo by ID
+GET http://localhost:6969/todos/{{todoId}}
+
+### Create a new todo
+POST http://localhost:6969/todos
+Content-Type: application/json  
+
+{
+  "title": "New Todo",
+  "description": "This is a new todo item."
+}
+
+### Update a todo by ID
+PUT http://localhost:6969/todos/{{todoId}}
+Content-Type: application/json
+
+{
+  "title": "Updated Todo",
+  "description": "This is an updated todo item."
+}       
+
+### Delete a todo by ID
+DELETE http://localhost:6969/todos/{{todoId}}   
