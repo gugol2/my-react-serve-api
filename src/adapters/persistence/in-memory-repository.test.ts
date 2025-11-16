@@ -14,9 +14,28 @@ describe("InMemoryTodoRepository", () => {
     updatedAt: new Date("2024-01-01T10:00:00Z"),
   };
 
+  const mockedInitialTodos: Todo[] = [
+    {
+      id: "todo_seed_1",
+      title: "Seed Todo 1",
+      description: "This is the first seed todo",
+      status: "pending",
+      createdAt: new Date("2024-01-01T09:00:00Z"),
+      updatedAt: new Date("2024-01-01T09:00:00Z"),
+    },
+    {
+      id: "todo_seed_2",
+      title: "Seed Todo 2",
+      description: "This is the second seed todo",
+      status: "completed",
+      createdAt: new Date("2024-01-02T09:00:00Z"),
+      updatedAt: new Date("2024-01-02T10:00:00Z"),
+    },
+  ];
+
   beforeEach(() => {
     // Create fresh repository for each test
-    repository = createInMemoryTodoRepository();
+    repository = createInMemoryTodoRepository(mockedInitialTodos);
   });
 
   describe("findAll", () => {
@@ -24,7 +43,7 @@ describe("InMemoryTodoRepository", () => {
       const todos = await repository.findAll();
 
       expect(Array.isArray(todos)).toBe(true);
-      expect(todos.length).toBeGreaterThan(0);
+      expect(todos.length).toBe(mockedInitialTodos.length);
       expect(todos[0]).toHaveProperty("id");
       expect(todos[0]).toHaveProperty("title");
       expect(todos[0]).toHaveProperty("status");
@@ -34,7 +53,7 @@ describe("InMemoryTodoRepository", () => {
       await repository.save(mockTodo);
       const todos = await repository.findAll();
 
-      expect(todos.length).toBeGreaterThan(0);
+      expect(todos.length).toBe(mockedInitialTodos.length + 1);
       const found = todos.find((t) => t.id === mockTodo.id);
       expect(found).toBeDefined();
     });
@@ -70,6 +89,8 @@ describe("InMemoryTodoRepository", () => {
       expect(result.success).toBe(false);
       if (!result.success) {
         expect(result.error.type).toBe("TodoNotFound");
+      }
+      if (!result.success && result.error.type === "TodoNotFound") {
         expect(result.error.id).toBe("non_existent_id");
       }
     });
@@ -154,7 +175,9 @@ describe("InMemoryTodoRepository", () => {
       expect(result.success).toBe(false);
       if (!result.success) {
         expect(result.error.type).toBe("TodoNotFound");
-        expect(result.error.id).toBe("non_existent_id");
+        if (result.error.type === "TodoNotFound") {
+          expect(result.error.id).toBe("non_existent_id");
+        }
       }
     });
 
@@ -189,7 +212,9 @@ describe("InMemoryTodoRepository", () => {
       expect(result.success).toBe(false);
       if (!result.success) {
         expect(result.error.type).toBe("TodoNotFound");
-        expect(result.error.id).toBe("non_existent_id");
+        if (result.error.type === "TodoNotFound") {
+          expect(result.error.id).toBe("non_existent_id");
+        }
       }
     });
 

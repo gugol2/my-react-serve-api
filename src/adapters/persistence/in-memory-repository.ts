@@ -1,13 +1,14 @@
 import { TodoRepository } from "../../application/ports/todo-repository.js";
 import { Todo, TodoId } from "../../domain/entities/todo.js";
 import { DomainError, Result } from "../../domain/errors/domain-errors.js";
-import { initialTodos } from "./seed-data.js";
 
 // In-Memory Repository Adapter (Infrastructure)
-export const createInMemoryTodoRepository = (): TodoRepository => {
+export const createInMemoryTodoRepository = (
+  initialTodos: Todo[]
+): TodoRepository => {
   // Initialize with seed data
   let todos: Map<TodoId, Todo> = new Map(
-    initialTodos.map(todo => [todo.id, todo])
+    initialTodos.map((todo) => [todo.id, todo])
   );
 
   return {
