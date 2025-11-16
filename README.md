@@ -7,7 +7,7 @@ A REST API built with [react-serve-js](https://github.com/react-serve/react-serv
 This repository contains **two different implementations** of the same Todo API to help you understand the practical differences between:
 
 1. **Hexagonal Architecture** (Ports & Adapters) -> Deployed: (https://my-react-serve-api-hexagonal-architecture.onrender.com)
-2. **Clean Architecture** (Uncle Bob's 4-Layer Architecture) -> Deployed: (https://my-react-serve-api-clean-architecture.onrender.com/)
+2. **Clean Architecture** (Uncle Bob's 4-Layer Architecture) -> Deployed: (https://my-react-serve-api-clean-code.onrender.com)
 
 Both implementations follow **functional programming** principles (no classes, pure functions, immutable data).
 
