@@ -245,7 +245,7 @@ curl -X POST http://localhost:6969/todos \
 - [Ports and Adapters Pattern](https://jmgarridopaz.github.io/content/hexagonalarchitecture.html)
 
 ### Framework Documentation
-- [react-serve-js](https://github.com/react-serve/react-serve-js)
+- [react-serve](https://github.com/akinloluwami/react-serve)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Vitest](https://vitest.dev/)
 

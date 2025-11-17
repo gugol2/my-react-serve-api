@@ -7,10 +7,15 @@ const { controller } = app
 
 function Backend () {
   return (
-    <App port={6969} parseBody={true}>
+    <App port={Number(process.env.PORT) || 6969} parseBody={true}>
       <Route path='/' method='GET'>
         {async () => {
           return <Response json={{ message: 'Welcome to the API!' }} />
+        }}
+      </Route>
+      <Route path='/health' method='GET'>
+        {async () => {
+          return <Response json={{ status: 'ok' }} />
         }}
       </Route>
       <TodoRoutes controller={controller} />

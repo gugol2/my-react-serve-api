@@ -1,0 +1,26 @@
+services:
+  # Hexagonal Architecture
+  - type: web
+    name: hexagonal-architecture-react-serve-api
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm run start:hexagonal
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+    healthCheckPath: /health
+
+  # Clean Architecture
+  - type: web
+    name: clean-architecture-react-serve-api
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm run start:clean
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+    healthCheckPath: /health
